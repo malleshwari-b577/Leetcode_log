@@ -11,13 +11,6 @@ class Solution:
 
         #check if both pointers point same node or not 
         while t1 is not t2:
-            if t1 is not None:
-                t1=t1.next
-            else:
-                t1=headB
-            if t2 is not None:
-                t2=t2.next
-            else:
-                t2=headA
-        
+            t1=t1.next if t1 is not None else headB
+            t2=t2.next if t2 is not None else headA
         return t1
