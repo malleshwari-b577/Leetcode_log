@@ -1,16 +1,16 @@
 class Solution:
     def firstPalindrome(self, words: List[str]) -> str:
-        ans=[]
+    
         for chr in words:
-            l=0 ; r=len(chr)-1 ; crt=list(chr) ; rev=crt
-            while l<r:
-                rev[r],rev[l]=rev[l],rev[r]
-                l+=1
-                r-=1
-            rev=''.join(rev)
-            print(chr,rev)
-            if chr==rev:
-                ans.append(chr)
-                break
+            if self.isPalin(chr):
+                return chr
+        return ""
 
-        return ''.join(ans)
+    def isPalin(self,word):
+        l=0 ; r=len(word)-1
+        while l<r:
+            if word[l]!=word[r]:
+                return False
+            l+=1
+            r-=1
+        return True
