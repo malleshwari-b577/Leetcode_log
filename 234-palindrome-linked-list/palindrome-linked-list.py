@@ -4,21 +4,43 @@
 #         self.val = val
 #         self.next = next
 class Solution:
+    def rev_ll(self,head):
+        if head is None or head.next is None:
+            return head
+
+        new_head=self.rev_ll(head.next)
+
+        forw=head.next
+
+        forw.next=head
+
+        head.next=None
+
+        return new_head
+
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        stack=[]
-        temp=head
+        sp=fp=head
 
-        #now traversal the LL and push in stack
-        while temp:
-            stack.append(temp.val)
-            temp=temp.next
+        #find the middle
+        while fp.next and fp.next.next:
+            fp=fp.next.next
+            sp=sp.next
+        
+        #reverse second half
+        new_head=self.rev_ll(sp.next)
 
-        #now re intilize the temp
-        temp=head
-        #now we will pop ele from stack and verify with LL
-        while stack and temp:
-            if stack.pop()!=temp.val:
+        #check first and second half
+        first=head
+        second=new_head
+
+        #loop running
+        while second:
+            if first.val!=second.val:
+                self.rev_ll(new_head)
                 return False
-            temp=temp.next
             
+            first=first.next
+            second=second.next
+
+        self.rev_ll(new_head)
         return True
